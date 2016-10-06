@@ -11,8 +11,18 @@ public class Student
 	private int      age;
 	private int      id;
 	    
-    public Student(String studentName, Calendar studentDOB)
+    public Student(String studentName, Calendar studentDOB) throws Exception
     {
+    	if(studentName.length() <= 0)
+    	{
+    		throw new Exception("Invalid Name");
+    	}
+    	
+    	if(studentDOB.after(new GregorianCalendar()))
+    	{
+    		throw new Exception("Invalid Date");
+    	}
+   		
     	this.name = studentName;
     	this.dob  = studentDOB;
     	this.id   = Math.abs((studentName + System.currentTimeMillis()).hashCode());

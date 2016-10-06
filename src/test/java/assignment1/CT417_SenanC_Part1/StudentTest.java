@@ -9,11 +9,21 @@ import java.util.GregorianCalendar;
 public class StudentTest
 {
 	@Test
-    public void getUsernameTest()
+    public void getUsernameHappyPathTest() throws Exception
     {
-		Student s1 = new Student("Senan", new GregorianCalendar(1994, 10, 1994));
-    	
-    	
+		Student s1 = new Student("Senan", new GregorianCalendar(1994, 10, 22));
         assertTrue(s1.getStudentName() == "Senan");
+    }
+	
+	@Test(expected=Exception.class)
+    public void getUsernameInvalidNameExceptionTest() throws Exception
+    {        
+        new Student("", new GregorianCalendar(1994, 10, 22));
+    }
+	
+	@Test(expected=Exception.class)
+    public void getUsernameInvalidDateExceptionTest() throws Exception
+    {        
+        new Student("", new GregorianCalendar(10994, 10, 22));
     }
 }
