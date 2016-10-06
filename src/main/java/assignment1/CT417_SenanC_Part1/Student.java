@@ -1,6 +1,8 @@
 package assignment1.CT417_SenanC_Part1;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Student 
 {
@@ -8,13 +10,13 @@ public class Student
 	private Calendar dob;
 	private int      age;
 	private int      id;
-	
-    public Student(String studentName, Calendar studentDOB, int studentAge)
+	    
+    public Student(String studentName, Calendar studentDOB)
     {
     	this.name = studentName;
     	this.dob  = studentDOB;
-    	this.id   = (studentName + System.currentTimeMillis()).hashCode();
-    	this.age  = studentAge;
+    	this.id   = Math.abs((studentName + System.currentTimeMillis()).hashCode());
+    	this.age  = (int) ((new GregorianCalendar().getTimeInMillis() - studentDOB.getTimeInMillis()) / (1000*60.0*60*24*7*52));
     }
     
     public String getStudentName()
@@ -22,9 +24,9 @@ public class Student
     	return this.name;
     }
     
-    public Calendar getStudentDOB()
+    public Date getStudentDOB()
     {
-    	return this.dob;	
+    	return this.dob.getTime();	
     }
     
     public int getStudentAge()
